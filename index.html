@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Day Care</title>
+
+    <style>
+
+        body{
+            margin: 0;
+            padding: 0;
+            background-image: url('./images/kids-playingg.avif');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        h1{
+            background-color: darkgoldenrod;
+            text-align: center;
+            padding: 4px;
+        }
+
+        .main-container{
+            display: flex;
+            flex-direction: row;
+        }
+
+        .input-container{
+            background-color: white;
+            display: inline-block;
+            padding: 20px 60px;
+            margin: 80px 200px;
+        }
+
+        .sub-heading{
+            font-size: 21px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .input-box{
+            padding: 10px;
+            border: 2px solid darkgoldenrod;
+            margin: 10px;
+        }
+
+        .btn{
+            margin: 15px;
+            padding: 5px 15px;
+            border: none;
+            border: 2px solid black;
+            border-radius: 2px;
+            background-color: darkgoldenrod;
+            
+        }
+
+        .kid-card{
+            padding: 10px 20px;
+            margin-top: 50px ;
+            border: 2px solid white;
+            border-radius: 20px;
+            width: 100px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kid's Day-Care</h1>
+
+    <div class="main-container">
+        <div class="input-container">
+            <p class="sub-heading">KID'S DETAILS</p>
+            <input type="text" class="input-box" id="kids-name" placeholder="Name"/><br/>
+            <input type="text" class="input-box" placeholder="Father's Name"/><br/>
+            <input type="text" class="input-box" placeholder="Mother's Name"/><br/>
+            <input type="text" class="input-box" placeholder="Age"/><br/>
+            <input type="text" class="input-box" placeholder="Address"/>
+
+            <br/>
+            <button type="button" class="btn" onclick="addKid()">Add</button>
+            <button type="button" class="btn" onclick="removeKid()">Remove</button>
+        </div>
+        
+        <div id="container"></div> 
+    </div> 
+                                        
+    
+    <script>
+
+        function randomEmoji(){
+            const emojis = [
+                '🩷','🧡','💛','💚','💙',
+                '🩵','💜','🤎','🖤','🩶',
+                '🤍','💔','❤️‍🔥','❤️‍🩹','❣️',
+                '💕','💞','💓','💗','💖',
+                '💘','💝'];
+
+            const min = 0;                     
+            const max = emojis.length - 1;     
+
+            const randomIndex = Math.floor(Math.random() * (max - min +1)) + min;
+
+            return emojis[randomIndex]
+        }
+
+        const kids = ["Parth"]
+
+        function loadKid(){
+            const kidsContainer = document.getElementById("container") 
+
+            kidsContainer.innerHTML = ""   
+
+            for(let i=0; i<kids.length; i++){
+                kidsContainer.innerHTML += `<div class='kid-card'>${i+1}. ${kids[i]} ${randomEmoji()} </div>`  
+            }
+        }
+        loadKid() 
+        
+        const kidsList = document.getElementById("kids-name")
+
+        function addKid(){
+            kids.push(kidsList.value)
+
+            kidsList.value = ""          
+            loadKid()
+        }
+
+        function removeKid(){
+            const kidIndex = kids.indexOf(kidsList.value);
+            kids.splice(kidIndex, 1);
+
+            kidsList.value = ""
+            loadKid()
+        }
+    </script>
+
+</body>
+</html>
